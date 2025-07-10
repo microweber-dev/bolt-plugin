@@ -2,6 +2,8 @@
 
 **BoltStarter** is an example module designed to help you get started with module development for the **AdminBolt** Linux shared hosting control panel. It provides a simple template and framework to build your own custom modules by demonstrating essential integration steps, configuration examples, and basic functionalities.
 
+![Microweber Plugin Screenshot](screenshot.png)
+
 ## Requirements
 - AdminBolt Linux Control Panel
 - PHP 8.2+ (for module compatibility)
