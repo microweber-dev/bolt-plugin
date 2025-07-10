@@ -52,7 +52,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => '/admin/plugin/microweber/',
+
+    'asset_url' => '/admin/plugin/microweber/',
 
     /*
     |--------------------------------------------------------------------------
