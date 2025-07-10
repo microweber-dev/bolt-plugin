@@ -14,6 +14,8 @@ cd /usr/local/bolt/plugins/microweber/app/mw-plugin
 sudo wget https://getcomposer.org/download/latest-stable/composer.phar
 sudo COMPOSER_ALLOW_SUPERUSER=1 bolt-php composer.phar install
 
+cp .env.example .env
+
 bolt-php artisan key:generate
 bolt-php artisan migrate --force
 bolt-php artisan db:seed --force
