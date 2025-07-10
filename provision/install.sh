@@ -26,4 +26,7 @@ bolt-php83 artisan key:generate
 bolt-php83 artisan migrate --force
 bolt-php83 artisan db:seed --force
 
+# Download microweber
+bolt-php83 artisan microweber:download
+
 echo "Installation successful!"

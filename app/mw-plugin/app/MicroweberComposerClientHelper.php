@@ -47,11 +47,13 @@ class MicroweberComposerClientHelper
     {
         $coreDownloader = new MicroweberDownloader();
 
-        if (setting('updateAppChannel') == 'beta') {
-            $coreDownloader->setReleaseSource(MicroweberDownloader::DEV_RELEASE);
-        } else {
-            $coreDownloader->setReleaseSource(MicroweberDownloader::STABLE_RELEASE);
-        }
+//        if (setting('updateAppChannel') == 'beta') {
+//            $coreDownloader->setReleaseSource(MicroweberDownloader::DEV_RELEASE);
+//        } else {
+//            $coreDownloader->setReleaseSource(MicroweberDownloader::STABLE_RELEASE);
+//        }
+
+        $coreDownloader->setReleaseSource(MicroweberDownloader::DEV_RELEASE);
 
         $coreDownloader->setComposerClient($this->getComposerClientInstance());
 

@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\InstallationResource\Pages;
 use App\Filament\Resources\InstallationResource\RelationManagers;
+use App\Models\Domain;
 use App\Models\Installation;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -23,7 +24,7 @@ class InstallationResource extends Resource
     {
         return $form
             ->schema([
-                //
+
             ]);
     }
 
@@ -37,12 +38,12 @@ class InstallationResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+//                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+//                Tables\Actions\BulkActionGroup::make([
+//                    Tables\Actions\DeleteBulkAction::make(),
+//                ]),
             ]);
     }
 
@@ -57,8 +58,8 @@ class InstallationResource extends Resource
     {
         return [
             'index' => Pages\ListInstallations::route('/'),
-            'create' => Pages\CreateInstallation::route('/create'),
-            'edit' => Pages\EditInstallation::route('/{record}/edit'),
+//            'create' => Pages\CreateInstallation::route('/create'),
+//            'edit' => Pages\EditInstallation::route('/{record}/edit'),
         ];
     }
 }

@@ -10,10 +10,10 @@ class Installation extends Model
 {
     use HasFactory;
 
-//    public function domain()
-//    {
-//        return $this->hasOne(Domain::class, 'id', 'domain_id');
-//    }
+    public function domain()
+    {
+        return $this->hasOne(Domain::class, 'id', 'domain_id');
+    }
 
     public function getTemplateAttribute()
     {

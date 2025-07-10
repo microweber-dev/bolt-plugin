@@ -52,9 +52,9 @@ return [
     |
     */
 
-    'url' => '/admin/plugin/microweber/',
+    'url' => '/admin/plugin/microweber',
 
-    'asset_url' => '/admin/plugin/microweber/',
+    'asset_url' => '/admin/plugin/microweber',
 
     /*
     |--------------------------------------------------------------------------
