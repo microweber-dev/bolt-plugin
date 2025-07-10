@@ -13,33 +13,32 @@ class MicroweberComposerClientHelper
             'https://modules.microweberapi.com/packages/microweberserverpackages/packages.json',
             'https://modules.microweberapi.com/packages/microweber/packages.json',
         ];
-
-//        $marketplaceRepositoriesUrls = setting('microweber.whitelabel.marketplace_repositories_urls');
-//        if ($marketplaceRepositoriesUrls) {
-//            $marketplaceRepositoriesUrls = explode("\n", $marketplaceRepositoriesUrls);
-//            $packageServers = array_merge($packageServers, $marketplaceRepositoriesUrls);
-//        }
+        $marketplaceRepositoriesUrls = setting('microweber.whitelabel.marketplace_repositories_urls');
+        if ($marketplaceRepositoriesUrls) {
+            $marketplaceRepositoriesUrls = explode("\n", $marketplaceRepositoriesUrls);
+            $packageServers = array_merge($packageServers, $marketplaceRepositoriesUrls);
+        }
 
         // The module connector must have own instance of composer client
         $composerClient = new Client();
         $composerClient->packageServers = $packageServers;
 
-//        $lic = setting('whitelabel_license_key');
-//
-//        if($lic) {
-//            $composerClient->addLicense([
-//                'local_key' => $lic
-//            ]);
-//        }
+        $lic = setting('whitelabel_license_key');
+
+        if($lic) {
+            $composerClient->addLicense([
+                'local_key' => $lic
+            ]);
+        }
           return $composerClient;
     }
 
     public function getComposerLicensedInstance()
     {
         $composerClientLicensed = new Client();
-//        $composerClientLicensed->addLicense([
-//            'local_key' => setting('whitelabel_license_key')
-//        ]);
+        $composerClientLicensed->addLicense([
+            'local_key' => setting('whitelabel_license_key')
+        ]);
 
         return $composerClientLicensed;
     }
@@ -48,7 +47,7 @@ class MicroweberComposerClientHelper
     {
         $coreDownloader = new MicroweberDownloader();
 
-        if (config('microweber.updateAppChannel') == 'beta') {
+        if (setting('updateAppChannel') == 'beta') {
             $coreDownloader->setReleaseSource(MicroweberDownloader::DEV_RELEASE);
         } else {
             $coreDownloader->setReleaseSource(MicroweberDownloader::STABLE_RELEASE);
