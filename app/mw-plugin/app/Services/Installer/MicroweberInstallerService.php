@@ -145,6 +145,8 @@ class MicroweberInstallerService
 //            $envJob->setInstallationId($findInstallation->id);
 //            $envJob->handle();
 
+
+            return true;
         }
 
     }

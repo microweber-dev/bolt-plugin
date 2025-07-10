@@ -8,6 +8,7 @@ use App\Services\Installer\MicroweberInstallerService;
 use Filament\Actions;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
 
 class ListInstallations extends ListRecords
@@ -39,12 +40,25 @@ class ListInstallations extends ListRecords
 
             ])->action(function($data) {
 
-                $domain = Domain::find($data['domain_id']);
+                    $domain = Domain::find($data['domain_id']);
 
-                $microweberInstallerService = new MicroweberInstallerService();
-                $install = $microweberInstallerService->install($domain, $data);
+                    $microweberInstallerService = new MicroweberInstallerService();
+                    $install = $microweberInstallerService->install($domain, $data);
 
+                    if ($install) {
+                        Notification::make('success')
+                            ->success()
+                            ->title('Microweber Installation Started')
+                            ->body('The installation process has been initiated successfully.')
+                            ->send();
+                    } else {
+                        Notification::make('error')
+                            ->title('Installation Failed')
+                            ->danger()
+                            ->body('There was an error starting the installation process.')
+                            ->send();
+                    }
                 }),
-        ];
+            ];
     }
 }

@@ -32,7 +32,11 @@ class InstallationResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('domain.domain'),
+                Tables\Columns\TextColumn::make('installation_path'),
+                Tables\Columns\TextColumn::make('app_version')->badge(),
+                Tables\Columns\TextColumn::make('template')->badge(),
+                Tables\Columns\TextColumn::make('installation_type')->badge()
             ])
             ->filters([
                 //
