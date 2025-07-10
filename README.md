@@ -2,12 +2,6 @@
 
 **BoltStarter** is an example module designed to help you get started with module development for the **AdminBolt** Linux shared hosting control panel. It provides a simple template and framework to build your own custom modules by demonstrating essential integration steps, configuration examples, and basic functionalities.
 
-## Features
-- **Template Module**: A foundation for creating new modules.
-- **Easy Integration**: Seamlessly integrates with AdminBolt, serving as a template for more advanced features.
-- **Configuration Example**: Provides a basic example of how configuration files can be set up for modules.
-- **Demo-Only**: This module doesn't perform any real operations; it's purely for demonstration and educational purposes.
-
 ## Requirements
 - AdminBolt Linux Control Panel
 - PHP 8.2+ (for module compatibility)
