@@ -22,11 +22,16 @@ sudo COMPOSER_ALLOW_SUPERUSER=1 bolt-php83 composer.phar install
 
 cp .env.example .env
 
+echo "Setting up environment variables..."
 bolt-php83 artisan key:generate
+
+echo "Configuring database connection..."
 bolt-php83 artisan migrate --force
+
+echo "Seeding the database..."
 bolt-php83 artisan db:seed --force
 
-# Download microweber
+echo "Downloading Microweber CMS..."
 bolt-php83 artisan microweber:download
 
 echo "Installation successful!"
