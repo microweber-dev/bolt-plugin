@@ -42,9 +42,7 @@ class ListInstallations extends ListRecords
                 $domain = Domain::find($data['domain_id']);
 
                 $microweberInstallerService = new MicroweberInstallerService();
-               $install = $microweberInstallerService->install($domain, $data);
-
-               dd($install);
+                $install = $microweberInstallerService->install($domain, $data);
 
                 }),
         ];

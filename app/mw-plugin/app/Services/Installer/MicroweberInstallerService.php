@@ -4,12 +4,16 @@ namespace App\Services\Installer;
 
 
 use App\Models\Domain;
+use App\Models\Installation;
 use Illuminate\Support\Str;
+use MicroweberPackages\SharedServerScripts\MicroweberWhitelabelWebsiteApply;
 
 class MicroweberInstallerService
 {
     public function install(Domain $findDomain, $data = [])
     {
+
+        $hostingAccountUsername = $findDomain->hosting_account['username'];
 
         $installPath = $findDomain->domain_root . '/microweber';
         $installPathPublicHtml = $findDomain->domain_public;
@@ -21,18 +25,10 @@ class MicroweberInstallerService
 
         $phpSbin = 'bolt-php83';
 
-        $createdDatabaseUsername = null;
-        $createdDatabaseUserPassword = null;
-        $createdDatabaseName = null;
-        $createdDatabaseHost = null;
-        $createdDatabasePort = null;
-
 
         $microweberSettingsFromPanel = setting('microweber');
 
-
-
-        $installationType = 'symlink';
+        $installationType = 'standalone'; // default installation type
         $installationLanguage = 'en';
         $website_manager_url = 'https://microweber.com';
 
@@ -46,9 +42,8 @@ class MicroweberInstallerService
             $website_manager_url = $microweberSettingsFromPanel['website_manager_url'];
         }
 
-
         $install = new \MicroweberPackages\SharedServerScripts\MicroweberInstaller();
-        $install->setChownUser($findDomain->domain_username);
+        $install->setChownUser($hostingAccountUsername);
         $install->enableChownAfterInstall();
 
         // $install->setPath($findDomain->domain_public);
@@ -87,12 +82,11 @@ class MicroweberInstallerService
 
         $status = $install->run();
 
-
-        dd($status);
-
         if (isset($status['success']) && $status['success']) {
 
             $sharedAppPath = config('microweber.sharedPaths.app');
+
+            // TODO
 //            $whitelabelSettings = setting('microweber.whitelabel');
 //            $whitelabelSettings['website_manager_url'] = setting('microweber.website_manager_url');
 //
@@ -110,12 +104,12 @@ class MicroweberInstallerService
                 //   \Log::error('Error applying whitelabel to website: ' . $mwInstallation->installation_path);
             }
 
-            $findInstallation = MicroweberInstallation::where('installation_path', $installPath)
+            $findInstallation = Installation::where('installation_path', $installPath)
                 ->where('domain_id', $findDomain->id)
                 ->first();
 
             if (!$findInstallation) {
-                $findInstallation = new MicroweberInstallation();
+                $findInstallation = new Installation();
                 $findInstallation->domain_id = $findDomain->id;
                 $findInstallation->installation_path = $installPath;
             }
@@ -140,6 +134,7 @@ class MicroweberInstallerService
                 symlink($installPath . '/public', $installPathPublicHtml);
             }
 
+            shell_exec('chown -R ' . $hostingAccountUsername . ':' . $hostingAccountUsername . ' ' . $installPath);
 
             $findInstallation->save();
 
@@ -147,7 +142,6 @@ class MicroweberInstallerService
 //            $envJob = new UpdateEnvVarsToWebsite();
 //            $envJob->setInstallationId($findInstallation->id);
 //            $envJob->handle();
-
 
         }
 
