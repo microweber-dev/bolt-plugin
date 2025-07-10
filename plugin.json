@@ -1,0 +1,12 @@
+{
+  "name": "Microweber",
+  "version": "0.0.1",
+  "description": "Microweber CMS Plugin for Adminbolt",
+  "author": "Microweber Team",
+  "license": "MIT",
+  "adminIndex": "app/laravel/public",
+  "clientIndex": "app/laravel/public",
+  "settings": {
+    "iframe": true
+  }
+}
