@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => 'Microweber',
+    'name' => 'Microweber Adminbolt Plugin',
 
     /*
     |--------------------------------------------------------------------------
