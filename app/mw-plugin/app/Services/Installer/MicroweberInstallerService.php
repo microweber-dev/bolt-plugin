@@ -127,7 +127,9 @@ class MicroweberInstallerService
             //symlink public folder
             if (is_dir($installPathPublicHtml)) {
                 //rename the public folder to public_old
-                rename($installPathPublicHtml, $installPathPublicHtml . '_old');
+                if (!is_dir($installPathPublicHtml . '_old')) {
+                    rename($installPathPublicHtml, $installPathPublicHtml . '_old');
+                }
             }
 
             if (!is_link($installPathPublicHtml)) {
