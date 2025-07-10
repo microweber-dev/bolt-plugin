@@ -16,6 +16,6 @@ fi
 #    echo "BoltStarter directory not found."
 #fi
 
-rm -rf /usr/local/bolt/plugins/microweber/app/laravel/vendor
-rm -rf /usr/local/bolt/plugins/microweber/app/laravel/composer.lock
-rm -rf /usr/local/bolt/plugins/microweber/app/laravel/database/database.sqlite
+rm -rf /usr/local/bolt/plugins/microweber/app/mw-plugin/vendor
+rm -rf /usr/local/bolt/plugins/microweber/app/mw-plugin/composer.lock
+rm -rf /usr/local/bolt/plugins/microweber/app/mw-plugin/database/database.sqlite

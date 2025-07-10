@@ -4,8 +4,8 @@
   "description": "Microweber CMS Plugin for Adminbolt",
   "author": "Microweber Team",
   "license": "MIT",
-  "adminIndex": "app/laravel/public",
-  "clientIndex": "app/laravel/public",
+  "adminIndex": "app/mw-plugin/public",
+  "clientIndex": "app/mw-plugin/public",
   "settings": {
     "iframe": true
   }
