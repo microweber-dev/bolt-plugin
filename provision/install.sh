@@ -1,37 +1,47 @@
-# microweber Installation Script
+#!/usr/bin/env bash
+# Microweber installation script
+set -euo pipefail
 
-echo "Starting microweber installation..."
+echo "Starting Microweber installation..."
 
-# Check if the script is run as root
+# Require root so we can install packages and write to the app folder
 if [ "$(id -u)" -ne 0 ]; then
     echo "This script must be run as root. Please use sudo."
     exit 1
 fi
 
 # Check if php83 is available
-if ! command -v php83 &> /dev/null; then
+if ! command -v php83 >/dev/null 2>&1; then
     echo "php83 command not found. Installing Bolt PHP 8.3..."
     yum install -y php83
 fi
 
-# Install microweber
-cd /usr/local/bolt/plugins/microweber/app/mw-plugin
+# Install Microweber
+APP_FOLDER=/usr/local/bolt/apps/microweber/app/mw-plugin
 
-sudo wget https://getcomposer.org/download/latest-stable/composer.phar
-sudo COMPOSER_ALLOW_SUPERUSER=1 php83 composer.phar install
+mkdir -p "$APP_FOLDER"
 
-cp .env.example .env
+# Download composer.phar
+if command -v curl >/dev/null 2>&1; then
+    curl -fsSL https://getcomposer.org/download/latest-stable/composer.phar -o "$APP_FOLDER/composer.phar"
+else
+    wget -q https://getcomposer.org/download/latest-stable/composer.phar -O "$APP_FOLDER/composer.phar"
+fi
+
+COMPOSER_ALLOW_SUPERUSER=1 php83 "$APP_FOLDER/composer.phar" install --no-interaction --working-dir="$APP_FOLDER" --ignore-platform-req=ext-intl --ignore-platform-req=ext-zip
+
+cp "$APP_FOLDER/.env.example" "$APP_FOLDER/.env"
 
 echo "Setting up environment variables..."
-php83 artisan key:generate
+php83 "$APP_FOLDER/artisan" key:generate
 
 echo "Configuring database connection..."
-php83 artisan migrate --force
+php83 "$APP_FOLDER/artisan" migrate --force
 
 echo "Seeding the database..."
-php83 artisan db:seed --force
+php83 "$APP_FOLDER/artisan" db:seed --force
 
 echo "Downloading Microweber CMS..."
-php83 artisan microweber:download
+php83 "$APP_FOLDER/artisan" microweber:download
 
 echo "Installation successful!"
