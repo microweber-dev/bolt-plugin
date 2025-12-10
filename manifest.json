@@ -1,6 +1,6 @@
 {
   "name": "Microweber",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Microweber CMS Plugin for Adminbolt",
   "author": "Microweber Team",
   "license": "MIT",
@@ -8,5 +8,8 @@
   "clientIndex": "app/mw-plugin/public",
   "settings": {
     "iframe": true
+  },
+  "requirements": {
+    "php": "8.3"
   }
 }
