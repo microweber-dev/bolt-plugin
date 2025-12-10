@@ -8,30 +8,30 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-# Check if bolt-php83 is available
-if ! command -v bolt-php83 &> /dev/null; then
-    echo "bolt-php83 command not found. Installing Bolt PHP 8.3..."
-    yum install -y bolt-php83
+# Check if php83 is available
+if ! command -v php83 &> /dev/null; then
+    echo "php83 command not found. Installing Bolt PHP 8.3..."
+    yum install -y php83
 fi
 
 # Install microweber
 cd /usr/local/bolt/plugins/microweber/app/mw-plugin
 
 sudo wget https://getcomposer.org/download/latest-stable/composer.phar
-sudo COMPOSER_ALLOW_SUPERUSER=1 bolt-php83 composer.phar install
+sudo COMPOSER_ALLOW_SUPERUSER=1 php83 composer.phar install
 
 cp .env.example .env
 
 echo "Setting up environment variables..."
-bolt-php83 artisan key:generate
+php83 artisan key:generate
 
 echo "Configuring database connection..."
-bolt-php83 artisan migrate --force
+php83 artisan migrate --force
 
 echo "Seeding the database..."
-bolt-php83 artisan db:seed --force
+php83 artisan db:seed --force
 
 echo "Downloading Microweber CMS..."
-bolt-php83 artisan microweber:download
+php83 artisan microweber:download
 
 echo "Installation successful!"
